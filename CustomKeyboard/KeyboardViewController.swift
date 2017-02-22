@@ -17,16 +17,26 @@ class KeyboardViewController: UIInputViewController {
     
     @IBOutlet weak var textView: UIView!
     
+    @IBOutlet weak var symView: UIView!
+    
+    
     @IBAction func goToNum(_ sender: UIButton) {
         numView.isHidden = false
         textView.isHidden = true
+        symView.isHidden = true
         
     }
     
+    @IBAction func goToSym(_ sender: UIButton) {
+        numView.isHidden = true
+        textView.isHidden = true
+        symView.isHidden = false
+    }
     
     @IBAction func goToText(_ sender: UIButton) {
         numView.isHidden = true
         textView.isHidden = false
+        symView.isHidden = true
     }
  
     @IBAction func globePress(_ sender: UIButton) {
@@ -53,15 +63,6 @@ class KeyboardViewController: UIInputViewController {
     }
     
     
-    
-    @IBAction func BlueButton(_ button: UIButton) {
-        print("blue button")
-        let str = button.titleLabel!.text!
-        //let index = str.startIndex
-        (textDocumentProxy as UIKeyInput).insertText(str)
-        
-       // numView_green.isHidden = false
-    }
     
     
     override func viewDidLoad() {
