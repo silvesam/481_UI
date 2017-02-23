@@ -19,6 +19,8 @@ class KeyboardViewController: UIInputViewController {
     
     @IBOutlet weak var symView: UIView!
     
+    var shiftPressed = false
+    
     
     @IBAction func goToNum(_ sender: UIButton) {
         numView.isHidden = false
@@ -43,11 +45,7 @@ class KeyboardViewController: UIInputViewController {
         advanceToNextInputMode()
     }
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
-    }
+
     
     @IBAction func spacePress(_ button: UIButton) {
         
@@ -56,14 +54,29 @@ class KeyboardViewController: UIInputViewController {
     }
     
     @IBAction func keyPress(_ button: UIButton) {
-        let str = button.titleLabel!.text!
+        
+        var str = button.titleLabel!.text!
         let index = str.startIndex
-        (textDocumentProxy as UIKeyInput).insertText("\(str[index])")
+        str = (String(str[index])).lowercased()
+        //(textDocumentProxy as UIKeyInput).insertText("\(str[index])")
+        if shiftPressed {
+           str =  str.uppercased()
+            shiftPressed = false
+        }
+        (textDocumentProxy as UIKeyInput).insertText(str)
         
     }
     
+    @IBAction func shiftPress(_ sender: UIButton) {
+        shiftPressed = true
+        
+    }
     
-    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        // Add custom view sizing constraints here
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
