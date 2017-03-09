@@ -17,6 +17,9 @@ class KeyboardViewController: UIInputViewController {
     
     @IBOutlet weak var textView: UIView!
     
+    //@IBOutlet weak var symView: UIView!
+    
+    
     @IBOutlet weak var symView: UIView!
     
     var heightConstraint: NSLayoutConstraint!
@@ -47,6 +50,11 @@ class KeyboardViewController: UIInputViewController {
         advanceToNextInputMode()
     }
     
+    
+    
+    @IBAction func enterPress(_ sender: UIButton) {
+        (textDocumentProxy as UIKeyInput).insertText("\n")
+    }
 
     
     @IBAction func spacePress(_ button: UIButton) {
