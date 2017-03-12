@@ -25,6 +25,7 @@ class KeyboardViewController: UIInputViewController {
     var heightConstraint: NSLayoutConstraint!
     
     var shiftPressed = false
+    var enterPressed = false
     
     
     @IBAction func goToNum(_ sender: UIButton) {
@@ -54,6 +55,7 @@ class KeyboardViewController: UIInputViewController {
     
     @IBAction func enterPress(_ sender: UIButton) {
         (textDocumentProxy as UIKeyInput).insertText("\n")
+        enterPressed = true
     }
 
     
@@ -73,6 +75,10 @@ class KeyboardViewController: UIInputViewController {
            str =  str.uppercased()
             shiftPressed = false
         }
+        if enterPressed {
+            str =  str.uppercased()
+            enterPressed = false
+        }
         (textDocumentProxy as UIKeyInput).insertText(str)
         
     }
@@ -80,6 +86,11 @@ class KeyboardViewController: UIInputViewController {
     @IBAction func shiftPress(_ sender: UIButton) {
         shiftPressed = true
         
+    }
+    
+    
+    @IBAction func backspacePress(_ sender: UIButton) {
+        (textDocumentProxy as UIKeyInput).deleteBackward()
     }
     
     override func updateViewConstraints() {
